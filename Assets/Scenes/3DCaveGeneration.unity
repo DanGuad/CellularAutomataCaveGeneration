@@ -229,7 +229,7 @@ GameObject:
   m_Layer: 0
   m_Name: CaveGenerator
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -245,11 +245,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35b9a185dab5a0345aa9b41364c561d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 15
-  height: 15
+  width: 25
+  height: 10
   depth: 30
-  caveMesh: {fileID: 1828263710378913001, guid: f03d149c2f78b0742a769c65f8a05108,
+  caveMesh: {fileID: 5984694490377607126, guid: 7775297d49b568d44868f18249fabeb1,
     type: 3}
+  numberOfSteps: 10
+  deathLimit: 10
+  birthLimit: 16
 --- !u!4 &751222299
 Transform:
   m_ObjectHideFlags: 0
