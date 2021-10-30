@@ -18,7 +18,7 @@ public class CellularBoolGrid : MonoBehaviour
     public int deathLimit = 0;
     public int birthLimit = 0;
 
-    float chanceToStartAlive = 0.45f;
+    public float chanceToStartAlive = 0.45f;
 
     void Start()
     {
