@@ -17,8 +17,11 @@ public class CellularBoolGrid : MonoBehaviour
     public int numberOfSteps = 0;
     public int deathLimit = 0;
     public int birthLimit = 0;
-
     public float chanceToStartAlive = 0.45f;
+
+    [Header("Collectables")]
+    public int collectableHidenLimit = 0;
+    public GameObject collectable;
 
     void Start()
     {
@@ -28,10 +31,11 @@ public class CellularBoolGrid : MonoBehaviour
         {
             cellMap = DoSimulationStep(cellMap);
         }
-        StartCoroutine(GenerateMapMesh(cellMap));
+        GenerateMapMesh(cellMap);
+        PlaceCollectableFunction(cellMap);
     }
 
-    IEnumerator GenerateMapMesh(bool[,,] map)
+    public void GenerateMapMesh(bool[,,] map)
     {
         for (int x = 0; x < width; x++)
         {
@@ -41,8 +45,8 @@ public class CellularBoolGrid : MonoBehaviour
                 {
                     if (map[x, y, z] == true)
                     {
-                        GameObject.Instantiate(caveMesh, new Vector3(x, y, z), Quaternion.identity, transform);
-                        yield return null; //new WaitForSeconds(.001f);
+                        GameObject.Instantiate(caveMesh, new Vector3(x, y, z) + transform.position, Quaternion.identity, transform);
+                        //yield return null; //new WaitForSeconds(.001f);
                     }
                 }
             }
@@ -79,7 +83,7 @@ public class CellularBoolGrid : MonoBehaviour
                 for (int z = 0; z < oldMap.GetLength(2); z++)
                 {
                     int numAiveNeighbors = CountAliveNeighbors(oldMap, x, y, z);
-                    Debug.Log(numAiveNeighbors);
+                    //Debug.Log(numAiveNeighbors);
                     //New value based on sim rules
                     //if cell is alive but has too few neibhors kill it
                     if (oldMap[x, y, z])
@@ -147,6 +151,27 @@ public class CellularBoolGrid : MonoBehaviour
         }
 
         return (count);
+    }
+
+    public void PlaceCollectableFunction(bool[,,] world)
+    {
+        for(int x=0; x < width; x++)
+        {
+            for(int y=0; y< height; y++)
+            {
+                for(int z = 0; z < depth; z++)
+                {
+                    if (world[x, y, z] == false)
+                    {
+                        int numAiveNeighbors = CountAliveNeighbors(world, x, y, z);
+                        if(numAiveNeighbors >= collectableHidenLimit)
+                        {
+                            GameObject.Instantiate(collectable, new Vector3(x,y,z) + transform.position, Quaternion.identity, transform);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
