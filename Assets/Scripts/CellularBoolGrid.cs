@@ -32,7 +32,7 @@ public class CellularBoolGrid : MonoBehaviour
             cellMap = DoSimulationStep(cellMap);
         }
         GenerateMapMesh(cellMap);
-        PlaceCollectableFunction(cellMap);
+        //PlaceCollectableFunction(cellMap);
     }
 
     public void GenerateMapMesh(bool[,,] map)
